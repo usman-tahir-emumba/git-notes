@@ -1,0 +1,17 @@
+.custom-gist-item {
+    box-shadow: 5;
+    background-color: white;
+    height: 415px;
+    border-radius: 10px;
+    >.file-viewer {
+      white-space: pre-wrap;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      height: 300px;
+      margin: 10px 
+    }
+    .MuiDivider-root {
+      padding-top: 10px;
+      margin: 0 15px;
+    }
+}

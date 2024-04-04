@@ -1,0 +1,62 @@
+$primary-color: #5acba1;
+
+.toggle-gists-view-container{
+    
+    & > div {
+        float: right;
+        font-size: 32px;
+        height: 45px;
+    }
+    .view-grid-icon {
+        border-right: 2px solid lightgrey;
+    }
+    .view-grid-icon, .view-list-icon {
+        padding: 5px;
+        color: lightgrey;
+        &:hover, &.active {
+            color: $primary-color;
+            cursor: pointer
+        }
+    }
+}
+
+.pagination-container {
+    margin: 30px 0px;
+
+    button{
+        background-color: $primary-color;
+        font-size: small;
+        &:hover {
+            background-color: $primary-color
+        }
+    }
+
+    >:first-child {
+        button{
+            padding: 8px 25px;
+            text-transform: capitalize;
+            .arrow-icon{
+                margin-left: 10px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+    }
+    >:last-child {
+        span {
+            color: grey;
+            font-size: small;
+        }
+
+        .MuiButtonGroup-contained{
+            float: right;
+            button{
+                padding: 0;
+            }
+            >:first-child {
+                border-color: white;
+            }
+
+        }
+    }
+}

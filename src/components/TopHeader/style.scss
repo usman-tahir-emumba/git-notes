@@ -1,0 +1,38 @@
+.top-header {
+    background-color: #5acba1;
+    height: 80px;
+    & > :first-child {
+        float: left;
+        margin-top: 20px;
+        margin-left: 10%;
+        
+        .logo {
+            height: 45px;
+        }
+    }
+    & > :last-child{
+        margin-top: 18px;
+        float: right;
+        margin-right: 10%;
+
+        .search-container{
+            border: 1px solid white;
+            border-radius: 5px;
+            color: white;
+            opacity: 0.5;
+            .MuiInputBase-root{
+                vertical-align: middle;
+                width: 250px;
+            }
+            input, button{
+                color: white;
+            }
+            &.active{
+                opacity: 1;
+            }
+            button{
+                padding: 10px;
+            }
+        }
+    }
+}
