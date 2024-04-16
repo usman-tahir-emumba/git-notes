@@ -20,6 +20,7 @@
             border-radius: 5px;
             color: white;
             opacity: 0.5;
+            display: inline-block;
             .MuiInputBase-root{
                 vertical-align: middle;
                 width: 250px;
@@ -33,6 +34,18 @@
             button{
                 padding: 10px;
             }
+        }
+    }
+    .login-btn {
+        background-color: white;
+        color: #5acba1;
+        font-weight: bold;
+        margin-left: 10px;
+        margin-right: 20px;
+        
+        &:hover {
+            background-color: white;
+            color: #5acba1;
         }
     }
 }
