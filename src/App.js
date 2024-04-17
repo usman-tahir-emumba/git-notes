@@ -5,15 +5,8 @@ import { UserManager } from 'oidc-client-ts';
 import { userManagerConfig } from './constants/index.ts';
 import { AuthProvider } from 'react-oidc-context';
 
-
-import { useEffect } from 'react';
-
 function App() {
   const userManager = new UserManager(userManagerConfig);
-  // userManager.signinCallback = () => {
-  //   alert('Signin Callback');
-  // }
-
   return (
     <div className="App">
       <AuthProvider userManager={userManager}>

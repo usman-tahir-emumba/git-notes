@@ -1,24 +1,14 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useEffect } from "react";
 import {User, UserManager} from 'oidc-client';
 import { useAuth } from 'react-oidc-context';
 import { userManagerConfig } from "../../constants/index.ts";
 
 export const HandleLoginCallback:React.FC = () => {
-    const userManager = new UserManager(userManagerConfig);
+    const userManager = useMemo(() => new UserManager(userManagerConfig), []);
     const auth = useAuth();
-
-    useEffect(() => {
-      getAccessToken();
-    }, []);
-
-    useEffect(() => {
-      if(auth.isAuthenticated){
-        saveUserInfo();
-      }
-    }, [auth.isAuthenticated]);
     
-    const getAccessToken = async () => {
+    const getAccessToken = useCallback(async () => {
         const code = new URLSearchParams(window.location.search).get('code');
         if (code) {
           try {
@@ -28,9 +18,13 @@ export const HandleLoginCallback:React.FC = () => {
             alert('Login failed. Please try again.');
           }
         }
-    };
+    }, [userManager]);
+
+    useEffect(() => {
+      getAccessToken();
+    }, [getAccessToken]);
     
-    const saveUserInfo = async () => {
+    const saveUserInfo = useCallback(async () => {
       try {
         const response = await fetch('https://api.github.com/user', {
           headers: {
@@ -53,7 +47,13 @@ export const HandleLoginCallback:React.FC = () => {
       } catch (error) {
         console.error('Error fetching user info(catch):', error);
       }
-    };
+    }, [auth.user, userManager]);
+
+    useEffect(() => {
+      if(auth.isAuthenticated){
+        saveUserInfo();
+      }
+    }, [auth.isAuthenticated, saveUserInfo]);
 
     return (<></>);
 };

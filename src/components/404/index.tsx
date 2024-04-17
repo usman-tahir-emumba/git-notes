@@ -1,6 +1,8 @@
+import React from "react";
+
 export const NotFound:React.FC = () => {
     return (
-        <marquee style={{marginTop: "200px"}}>Hey, You found something new which doesn't exist :p</marquee>
+        <h1 style={{marginTop: "200px"}}>Hey, You found something new which doesn't exist :p</h1>
     );
 }
 

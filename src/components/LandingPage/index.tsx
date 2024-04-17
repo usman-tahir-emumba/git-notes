@@ -1,5 +1,5 @@
 import  './style.scss';
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Container, Grid, CircularProgress, Button, ButtonGroup } from '@mui/material';
 import { CiGrid41 } from "react-icons/ci";
@@ -28,17 +28,11 @@ export const LandingPage:React.FC = () => {
   const auth = useAuth();
   const PAGE_SIZE = 9; // 3 rows in grid view 
 
-  useEffect(() => {
-    if(gists.length || auth.isLoading){
-      return;
-    }
-    fetchGists();
-  }, [auth.isLoading]);
 
   const fetchNextPage = () => fetchGists(currentPage + 1);
   const fetchPrevPage = () => fetchGists(currentPage - 1);
 
-  const fetchGists = async (pageNumber = 1, id = '') => {
+  const fetchGists = useCallback(async (pageNumber = 1, id = '') => {
     setIsLoading(true); // Setting loading state to true on page load
     try {
       const jsonHeaders = {
@@ -75,7 +69,7 @@ export const LandingPage:React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [auth.isAuthenticated, auth.user?.access_token]);
 
   const toggleViewMode = (event) => {
     event.stopPropagation();
@@ -84,6 +78,14 @@ export const LandingPage:React.FC = () => {
   const findGistById = (gistId) => {
     return fetchGists(1, gistId);
   }
+
+  
+  useEffect(() => {
+    if(gists.length || auth.isLoading){
+      return;
+    }
+    fetchGists();
+  }, [auth.isLoading, gists, fetchGists]);
 
   return (
     <>
